@@ -1,0 +1,19 @@
+{
+  "name": "@hexlet/code",
+  "version": "1.0.0",
+  "description": "file distinguisher",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TonyHacatony/backend-project-lvl2.git"
+  },
+  "author": "Eduard Veramenkou",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TonyHacatony/backend-project-lvl2/issues"
+  },
+  "homepage": "https://github.com/TonyHacatony/backend-project-lvl2#readme"
+}
