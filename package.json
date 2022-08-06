@@ -21,6 +21,14 @@
   "type": "module",
   "homepage": "https://github.com/TonyHacatony/backend-project-lvl2#readme",
   "dependencies": {
-    "commander": "^9.4.0"
+    "commander": "^9.4.0",
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "eslint": "^8.21.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jest": "^26.7.0",
+    "jest": "^28.1.3"
   }
 }
