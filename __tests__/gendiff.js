@@ -1,11 +1,26 @@
+import { expect, test } from '@jest/globals';
 import { getDiff, getFilesData } from '../index.js';
 
-const filepath1 = '__fixtures__/file1.json';
-const filepath2 = '__fixtures__/file2.json';
-const filepathResult1 = '__fixtures__/result1.txt';
+const jsonFilepath1 = '__fixtures__/file1.json';
+const jsonFilepath2 = '__fixtures__/file2.json';
 
-test('main func test', () => {
-  const [data1, data2, resData] = getFilesData(filepath1, filepath2, filepathResult1);
+const ymlFilepath1 = '__fixtures__/file1.yml';
+const ymlFilepath2 = '__fixtures__/file2.yaml';
+
+const incorrectFilepath = '__fixtures__/incorrect.format';
+
+const flatResultFilepath = '__fixtures__/result1.txt';
+
+const flatTest = (filepath1, filepath2) => {
+  const [data1, data2, resData] = getFilesData(filepath1, filepath2, flatResultFilepath);
   const diff = getDiff(data1, data2);
   expect(diff).toEqual(resData);
+};
+
+test('flat json files', () => flatTest(jsonFilepath1, jsonFilepath2, flatResultFilepath));
+
+test('flat yml files', () => flatTest(ymlFilepath1, ymlFilepath2, flatResultFilepath));
+
+test('failed format', () => {
+  expect(() => getFilesData(incorrectFilepath)).toThrowError();
 });

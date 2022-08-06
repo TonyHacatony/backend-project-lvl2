@@ -1,6 +1,10 @@
+import yaml from 'js-yaml';
+
 const parseMapper = {
   json: (file) => JSON.parse(file),
   txt: (file) => file,
+  yml: (file) => yaml.load(file),
+  yaml: (file) => yaml.load(file),
 };
 
 const parse = (file, extension) => {

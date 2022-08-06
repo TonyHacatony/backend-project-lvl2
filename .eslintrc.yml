@@ -14,6 +14,7 @@ parserOptions:
 rules:
   no-console: 0
   import/no-unresolved: "off"
+  jest/expect-expect: "off"
   import/extensions:
     - error
     - ignorePackages
