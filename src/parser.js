@@ -1,5 +1,6 @@
 const parseMapper = {
   json: (file) => JSON.parse(file),
+  txt: (file) => file,
 };
 
 const parse = (file, extension) => {

@@ -29,6 +29,6 @@ const getDiff = (obj1, obj2) => {
   return `${keys.reduce((acc, key) => handleRow(acc, key, obj1, obj2), '{\n')}}`;
 };
 
-const getFilesData = (filepath1, filepath2) => [filepath1, filepath2].map(filepathToObject);
+const getFilesData = (...filepath) => [...filepath].map(filepathToObject);
 
 export { getDiff, getFilesData };
