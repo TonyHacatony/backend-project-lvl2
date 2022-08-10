@@ -1,34 +1,33 @@
 import { expect, test } from '@jest/globals';
 import { getDiff, getFilesData } from '../index.js';
+import findFormatter from '../src/formatters/index.js';
 
-const flatJson1 = '__fixtures__/flat/file1.json';
-const flatJson2 = '__fixtures__/flat/file2.json';
-const flatYml1 = '__fixtures__/flat/file1.yml';
-const flatYaml2 = '__fixtures__/flat/file2.yaml';
-const flatResult = '__fixtures__/flat/result.txt';
+const nestedJson1 = '__fixtures__/file1.json';
+const nestedJson2 = '__fixtures__/file2.json';
+const nestedYml1 = '__fixtures__/file1.yml';
+const nestedYaml2 = '__fixtures__/file2.yaml';
 
-const nestedJson1 = '__fixtures__/nested/file1.json';
-const nestedJson2 = '__fixtures__/nested/file2.json';
-const nestedYml1 = '__fixtures__/nested/file1.yml';
-const nestedYaml2 = '__fixtures__/nested/file2.yaml';
-const nestedResult = '__fixtures__/nested/result.txt';
+const treeResult = '__fixtures__/result.txt';
+const plainResult = '__fixtures__/plain.result.txt';
 
 const incorrectFilepath = '__fixtures__/incorrect.format';
 
-const checkFilesTest = (filepath1, filepath2, result) => {
-  const [data1, data2, resData] = getFilesData(filepath1, filepath2, result);
+const checkFilesTest = (filepath1, filepath2, result, format = 'tree') => {
+  const [data1, data2, resultFile] = getFilesData(filepath1, filepath2, result);
+  const formatter = findFormatter(format);
   const diff = getDiff(data1, data2);
-  expect(diff).toBe(resData);
+  const actual = formatter(diff).trim();
+  expect(actual).toBe(resultFile);
 };
 
 test('failed format', () => {
   expect(() => getFilesData(incorrectFilepath)).toThrowError();
 });
 
-test('flat json files', () => checkFilesTest(flatJson1, flatJson2, flatResult));
+test('tree nested json files', () => checkFilesTest(nestedJson1, nestedJson2, treeResult));
 
-test('flat yml files', () => checkFilesTest(flatYml1, flatYaml2, flatResult));
+test('tree nested yml files', () => checkFilesTest(nestedYml1, nestedYaml2, treeResult));
 
-test('nested json files', () => checkFilesTest(nestedJson1, nestedJson2, nestedResult));
+test('plain nested json files', () => checkFilesTest(nestedJson1, nestedJson2, plainResult, 'plain'));
 
-test('nested yml files', () => checkFilesTest(nestedYml1, nestedYaml2, nestedResult));
+test('plain nested yml files', () => checkFilesTest(nestedYml1, nestedYaml2, plainResult, 'plain'));
